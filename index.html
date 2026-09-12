@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Coffee?</title>
+<title>a secret</title>
 <meta name="theme-color" content="#16182B">
-<meta property="og:title" content="Ally, coffee?">
-<meta property="og:description" content="see you later at JWU">
+<meta property="og:title" content="I have something for you.">
+<meta property="og:description" content="it's a secret">
 <meta property="og:type" content="website">
 <!-- For a thumbnail in the chat preview, add your full published URL:
      <meta property="og:image" content="https://YOURNAME.github.io/REPO/reaction.gif"> -->
@@ -28,7 +28,7 @@ body{
   background:var(--ink);color:var(--chalk);
   font-family:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
   font-weight:400;
-  min-height:100svh;
+  min-height:100vh;min-height:100svh;
   display:flex;flex-direction:column;
   padding:max(var(--pad),env(safe-area-inset-top)) var(--pad) max(var(--pad),env(safe-area-inset-bottom));
   transition:background-color .55s cubic-bezier(.4,0,.2,1),color .55s cubic-bezier(.4,0,.2,1);
@@ -39,7 +39,7 @@ body.won{background:var(--zest);color:var(--ink)}
 .stage>section{margin-block:auto}   /* centres when it fits, scrolls when it doesn't */
 [hidden]{display:none!important}
 
-.ask{font-weight:800;font-size:clamp(58px,17vw,112px);line-height:.86;letter-spacing:-.045em;margin:0}
+.ask{font-weight:800;font-size:clamp(52px,15vw,104px);line-height:.86;letter-spacing:-.045em;margin:0;overflow-wrap:break-word}
 .mono{font-size:clamp(15px,4vw,18px);line-height:1.55;color:var(--dim);margin:20px 0 0}
 body.won .mono{color:rgba(22,24,43,.62)}
 
@@ -77,7 +77,7 @@ body.won .mono{color:rgba(22,24,43,.62)}
   font-weight:800;font-size:14px;color:var(--dim);
 }
 .opts button:hover .ltr{border-color:var(--zest);color:var(--zest)}
-.opts .txt{font-size:clamp(19px,5vw,23px);font-weight:600;letter-spacing:-.02em}
+.opts .txt{font-size:clamp(16.5px,5.2vw,23px);font-weight:600;letter-spacing:-.02em}
 
 .nudge{font-size:14px;font-weight:600;color:var(--dim);margin:20px 0 0}
 
@@ -86,7 +86,7 @@ body.won .mono{color:rgba(22,24,43,.62)}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ---- screen 3 ---- */
-.verdict{font-weight:800;font-size:clamp(76px,25vw,168px);line-height:.78;letter-spacing:-.055em;margin:0}
+.verdict{font-weight:800;font-size:clamp(70px,min(25vw,24svh),168px);overflow-wrap:break-word;line-height:.78;letter-spacing:-.055em;margin:0}
 .tail{font-weight:600;font-size:clamp(26px,8vw,48px);line-height:1;letter-spacing:-.035em;margin:6px 0 0}
 .punch{
   display:inline-block;margin:32px 0 0;padding:10px 18px 13px;
@@ -95,7 +95,8 @@ body.won .mono{color:rgba(22,24,43,.62)}
   transform:rotate(-1.6deg);
 }
 .quip{font-weight:600;font-size:clamp(20px,5.5vw,27px);letter-spacing:-.025em;margin:26px 0 0}
-.foot{font-weight:600;font-size:clamp(16px,4.2vw,19px);margin:8px 0 0;opacity:.6}
+.gift{font-weight:800;font-size:clamp(21px,5.8vw,30px);letter-spacing:-.03em;line-height:1.1;margin:28px 0 0}
+.foot{font-weight:600;font-size:clamp(16px,4.2vw,19px);margin:7px 0 0;opacity:.6}
 .tiny{font-weight:600;font-size:13px;margin:24px 0 0;opacity:.42}
 .gif{
   display:block;width:100%;max-width:400px;max-height:36svh;object-fit:cover;
@@ -104,6 +105,22 @@ body.won .mono{color:rgba(22,24,43,.62)}
 }
 
 :focus-visible{outline:2.5px solid currentColor;outline-offset:3px}
+@media (max-height:620px){
+  :root{--pad:clamp(14px,4vw,28px)}
+  .ask{font-size:clamp(34px,9vh,60px)}
+  .verdict{font-size:clamp(46px,15vh,104px)}
+  .tail{font-size:clamp(19px,5vh,30px)}
+  .punch{font-size:clamp(21px,5.5vh,34px);margin-top:18px}
+  .quip{font-size:clamp(16px,4vh,21px);margin-top:15px}
+  .gift{font-size:clamp(18px,min(5vh,5.4vw),26px);margin-top:18px}
+  .gif{max-height:30svh;margin-top:15px}
+  .opts button{min-height:50px;padding:9px 6px}
+  .opts .txt{font-size:clamp(15px,min(4.5vh,4.9vw),20px)}
+  .yes{padding:15px;margin-top:22px;font-size:clamp(22px,6vh,30px)}
+  .tiny{margin-top:16px}
+}
+@media (min-width:1000px){ .stage{max-width:680px} }
+
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
@@ -135,6 +152,7 @@ body.won .mono{color:rgba(22,24,43,.62)}
     <p class="punch">that's a yes</p>
     <p class="quip" id="v-quip"></p>
     <img class="gif" id="v-gif" alt="" hidden>
+    <p class="gift">i have something for you.</p>
     <p class="foot" id="v-foot"></p>
     <p class="tiny">no takebacks</p>
   </section>
@@ -164,7 +182,7 @@ const NOS = [
 // Wait too long on the choices and more of them appear. Still all nos. Still all yeses.
 const LATE = [
   { at: 6000,  head:"No", tail:"rush. still yes.",          quip:"took your time." },
-  { at:13000,  head:"No", tail:"point pretending otherwise.",quip:"there it is." }
+  { at:13000,  head:"No", tail:"point denying it.",         quip:"there it is." }
 ];
 
 const $ = s => document.querySelector(s);
